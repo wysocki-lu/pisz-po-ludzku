@@ -26,7 +26,7 @@ Reguły pochodzą z dwóch źródeł:
 git clone https://github.com/wysocki-lu/pisz-po-ludzku ~/.claude/skills/pisz-po-ludzku
 ```
 
-Skill aktywuje się przy pisaniu i redagowaniu polskich tekstów. Można też wywołać ręcznie: `/pisz-po-ludzku`.
+Skill aktywuje się przy pisaniu i redagowaniu polskich tekstów. Można też wywołać ręcznie: `/pisz-po-ludzku`. Jako zwykły markdown działa też z innymi narzędziami (Codex, Cursor, Windsurf): wskaż SKILL.md jako kontekst.
 
 ## Testy
 
@@ -51,6 +51,10 @@ Zero zależności. Zgłasza twarde błędy (znaki AI, zakazane frazy, frazesy ma
 - `references/liczby-i-fakty.md`: teksty analityczne (fakt + liczba)
 - `references/maniery-bielika.md`: wnioski z sondy empirycznej
 - `references/przyklady.md`: before/after
+
+## English summary
+
+A Claude skill that keeps AI-generated Polish natural and free of AI tells. Polish AI slop differs from English slop: we measured it on a 60-text corpus from Bielik 11B, the only major natively Polish LLM (see [sonda-bielika](https://github.com/wysocki-lu/sonda-bielika)). The skill covers banned phrases and structures, Polish honorific register (Pan/Pani/Państwo vs informal "ty"), grammar traps (month declension), typography (no em-dashes, no smart quotes, heading hierarchy) and a "what is NOT slop" whitelist, because English anti-slop lists would cut greetings that are mandatory in Polish business writing. Includes a zero-dependency checker script. Tested on 14 real-world marketing scenarios: 0 violations with the skill vs 22 in 4 baseline texts without it.
 
 ## Podziękowania
 
