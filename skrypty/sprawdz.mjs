@@ -65,6 +65,36 @@ const ZNAKI = [
   { re: /[​‌‍﻿]/g, nazwa: 'znak zero-width' },
 ];
 
+// Wyrażenia przyimkowe, w których musi stać nazwa czynności, a nie nazwa rzeczy.
+// Odkryte na miniaturze wpisu z napisem „Jak AI próbowano użyć przy broni”: zdanie brzmi jak urwane,
+// bo brakuje rzeczownika odsłownego („przy budowie broni”, „przy produkcji broni”). Gramatycznie
+// brakuje członu nadrzędnego wyrażenia przyimkowego, a nazwa rzeczy zostaje bez tego, do czego należy.
+const PRZYIMKI_CZYNNOSCI = /\b(przy|podczas|w trakcie|w toku|w czasie)\s+((?:\p{Ll}+\s+){0,2}\p{Ll}+)/giu;
+// Formy nazw czynności: rzeczowniki odsłowne i typowe nazwy procesów w miejscowniku oraz dopełniaczu
+const KONCOWKI_CZYNNOSCI = /(aniu|eniu|ęciu|ciu|ania|enia|ęcia|cia|acji|acja|ucji|icji|ażu|aż|unku|unek|ury|ura|bie|by|wie|wy|cy|acht|ach|ów|aniach|eniach)$/u;
+const SLOWNIK_CZYNNOSCI = /^(prac|prace|pracy|pracach|prób|próbie|próbach|testach|testów|badaniach|badań|kontroli|obsłudze|analizie|zakupie|zakupach|zakupów|sprzedaży|naprawie|napraw|montażu|budowie|budowy|produkcji|projekcie|wdrożeniu|wdrożeń|starcie|okazji|rozmowie|rozmowach|rozmów|spotkaniu|spotkań|szkoleniu|szkoleń|awarii|remoncie|remontów|przeglądzie|przeglądów|audycie|audytu|kampanii|wojny|wojnie|lekcji)$/u;
+// zaimki i określenia odsyłające: „przy tym”, „przy każdej z nich” nie nazywają rzeczy, tylko wracają do wcześniejszej myśli
+const ZAIMKI = /^(tym|tej|tych|temu|to|nim|niej|nich|niego|czym|każdej|każdym|każdego|wszystkim|wszystkich|jednym|jednej|drugim|drugiej|takiej|takim|swojej|swoim|naszej|naszym|której|którym|niektórych|innych|innym)$/u;
+
+function maNazweCzynnosci(slowa) {
+  return slowa.some((w) => KONCOWKI_CZYNNOSCI.test(w) || SLOWNIK_CZYNNOSCI.test(w));
+}
+
+function sprawdzWyrazeniaPrzyimkowe(tekst) {
+  const twarde = [];
+  const miekkie = [];
+  for (const [, przyimek, reszta] of tekst.matchAll(PRZYIMKI_CZYNNOSCI)) {
+    const slowa = reszta.split(/\s+/).filter(Boolean);
+    if (maNazweCzynnosci(slowa) || ZAIMKI.test(slowa[0])) continue;
+    const fraza = `${przyimek} ${slowa[0]}`;
+    // „podczas”, „w trakcie”, „w toku” i „w czasie” zapowiadają zdarzenie, więc nazwa rzeczy to błąd;
+    // „przy” bywa poprawne w znaczeniu miejsca („przy stole”), dlatego tam tylko zwracamy uwagę
+    if (przyimek.toLowerCase() === 'przy') miekkie.push(fraza);
+    else twarde.push(fraza);
+  }
+  return { twarde, miekkie };
+}
+
 function znajdzFrazy(tekst, frazy) {
   const dol = tekst.toLowerCase();
   const wyniki = [];
@@ -128,6 +158,14 @@ function sprawdz(tekst, nazwa) {
 
   for (const linia of sprawdzTitleCase(tekst)) {
     bledy.push(`nagłówek Title Case: "${linia}"`);
+  }
+
+  const przyimkowe = sprawdzWyrazeniaPrzyimkowe(tekst);
+  for (const fraza of przyimkowe.twarde) {
+    bledy.push(`brak nazwy czynności w "${fraza}" (dopisz rzeczownik odsłowny, np. podczas budowy)`);
+  }
+  for (const fraza of przyimkowe.miekkie) {
+    uwagi.push(`"${fraza}" bez nazwy czynności: jeśli chodzi o czynność, dopisz ją (np. przy budowie), jeśli o miejsce, zostaw`);
   }
 
   const maPanstwo = /państw/i.test(tekst);

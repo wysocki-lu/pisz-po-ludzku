@@ -35,6 +35,7 @@ Pełna lista z korektami: [references/struktury.md](references/struktury.md)
 ## 4. Gramatyka i rejestr
 
 - Miejscownik po "w": "w kwietniu", nigdy "w kwiecień". Pełna tabela miesięcy w referencji.
+- Po "przy", "podczas", "w trakcie" i "w czasie" musi stać nazwa czynności, czyli rzeczownik odsłowny: "przy budowie broni", nie "przy broni". Brakuje wtedy członu nadrzędnego wyrażenia przyimkowego, a sama nazwa rzeczy zostaje przydawką bez nadrzędnika.
 - Poprawna odmiana "Państwa" (nie istnieją formy "Państwymi", "Państwego").
 - Rejestr: do klienta biznesowego per "Pan / Pani / Państwo". Forma "Ty" tylko, gdy tak stanowi głos marki.
 - Perspektywa: "my" (nadawca, np. agencja) + "Państwo" (odbiorca). Nie mieszaj.

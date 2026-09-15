@@ -50,3 +50,28 @@ Po polsku nagłówek pisze się jak zdanie: wielka litera na początku, reszta m
 
 - Poprawnie: "Dlaczego audyt SEO to pierwszy krok do poprawy widoczności"
 - Błąd (Title Case, kalka z angielskiego): "Dlaczego Audyt SEO To Pierwszy Krok Do Poprawy Widoczności"
+
+## Wyrażenia przyimkowe: brakująca nazwa czynności
+
+Przyimki „przy”, „podczas”, „w trakcie”, „w toku” i „w czasie” zapowiadają czynność albo zdarzenie.
+Jeśli po nich stanie sama nazwa rzeczy, zdanie brzmi jak urwane w połowie.
+
+- Błąd: „Jak AI próbowano użyć przy broni”
+- Poprawnie: „Jak AI próbowano użyć przy budowie broni”, „przy produkcji broni”, „przy pracach nad bronią”
+
+Czego brakuje, po imieniu: **rzeczownika odsłownego** (inaczej odczasownikowego), czyli nazwy czynności
+utworzonej od czasownika: budować to budowa, produkować to produkcja, pisać to pisanie. Taki rzeczownik
+jest **członem nadrzędnym wyrażenia przyimkowego**, a nazwa rzeczy („broni”) to przy nim
+**przydawka dopełniaczowa**. Bez członu nadrzędnego przydawka nie ma do czego się odnieść i dlatego
+czytelnik czuje, że jedno słowo wypadło.
+
+Ta sama zasada działa przy innych rzeczownikach czynnościowych, które nie są odsłowne, ale nazywają
+czynność albo zdarzenie: praca, próba, test, kontrola, obsługa, analiza, remont, awaria.
+
+- Błąd: „podczas broni”, „w trakcie serwera”
+- Poprawnie: „podczas testów broni”, „w trakcie awarii serwera”
+
+Wyjątek, o którym trzeba pamiętać przy poprawianiu: „przy” bywa też przyimkiem miejsca i wtedy nazwa rzeczy
+jest poprawna („przy stole”, „przy oknie”, „przy komputerze”). Dlatego automat zgłasza „przy” jako uwagę
+do oceny, a „podczas”, „w trakcie”, „w toku” i „w czasie” jako błąd.
+
