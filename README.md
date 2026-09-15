@@ -2,6 +2,17 @@
 
 Skill dla Claude (Claude Code / claude.ai) pilnujący poprawnej, naturalnej polszczyzny w tekstach generowanych: bez manier AI, z właściwym rejestrem grzecznościowym, odmianą i konkretami zamiast waty.
 
+## Co nowego (15.09.2026, wersja 1.1)
+
+Skill jest zaktualizowany i wzbogacony o **składnię języka polskiego zgodną z normą słownikową**. Wcześniej pilnował słownictwa, rejestru, fleksji i typografii, a od tej wersji sprawdza także budowę zdania.
+
+Pierwsza reguła z tej grupy dotyczy **wyrażeń przyimkowych, w których musi stać nazwa czynności**. Po przyimkach „przy”, „podczas”, „w trakcie”, „w toku” i „w czasie” potrzebny jest rzeczownik odsłowny, czyli nazwa czynności, a nie sama nazwa rzeczy.
+
+- Źle: „Jak AI próbowano użyć przy broni”, „podczas broni”, „w trakcie serwera”.
+- Dobrze: „przy budowie broni”, „przy pracach nad bronią”, „podczas testów broni”, „w trakcie awarii serwera”.
+
+Brakujący wyraz to **człon nadrzędny wyrażenia przyimkowego**. Bez niego nazwa rzeczy zostaje **przydawką dopełniaczową** bez nadrzędnika i zdanie brzmi jak urwane w połowie. Automat zgłasza „podczas”, „w trakcie”, „w toku” i „w czasie” jako błąd, a „przy” jako uwagę do oceny, bo bywa przyimkiem miejsca i „przy stole” jest poprawne. Pełny opis: [references/gramatyka.md](references/gramatyka.md).
+
 ## Dlaczego osobny skill dla polskiego
 
 Anglojęzyczne poradniki anty-slop (np. stop-slop) łapią kalki z angielskiego, ale nie znają problemów, które istnieją tylko po polsku:
@@ -38,7 +49,7 @@ Skill przeszedł 14 scenariuszy testowych pisanych z perspektywy freelancerów i
 node skrypty/sprawdz.mjs tekst.txt
 ```
 
-Zero zależności. Zgłasza twarde błędy (znaki AI, zakazane frazy, frazesy marketingowe, preambuły, Title Case, zła odmiana miesięcy) i miękkie uwagi do ręcznej oceny.
+Zero zależności. Zgłasza twarde błędy (znaki AI, zakazane frazy, frazesy marketingowe, preambuły, Title Case, zła odmiana miesięcy, wyrażenia przyimkowe bez nazwy czynności) i miękkie uwagi do ręcznej oceny.
 
 ## Struktura
 
@@ -46,7 +57,7 @@ Zero zależności. Zgłasza twarde błędy (znaki AI, zakazane frazy, frazesy ma
 - `skrypty/sprawdz.mjs`: automat kontrolny
 - `references/frazy.md`: zakazane frazy + co NIE jest slopem
 - `references/struktury.md`: 14 zakazanych wzorców kompozycyjnych
-- `references/gramatyka.md`: miejscownik, odmiana "Państwa", rejestr Pan/Ty
+- `references/gramatyka.md`: miejscownik, odmiana "Państwa", rejestr Pan/Ty, składnia wyrażeń przyimkowych
 - `references/typografia.md`: znaki zakazane, hierarchia nagłówków
 - `references/liczby-i-fakty.md`: teksty analityczne (fakt + liczba)
 - `references/maniery-bielika.md`: wnioski z sondy empirycznej
@@ -54,7 +65,7 @@ Zero zależności. Zgłasza twarde błędy (znaki AI, zakazane frazy, frazesy ma
 
 ## English summary
 
-A Claude skill that keeps AI-generated Polish natural and free of AI tells. Polish AI slop differs from English slop: we measured it on a 60-text corpus from Bielik 11B, the only major natively Polish LLM (see [sonda-bielika](https://github.com/wysocki-lu/sonda-bielika)). The skill covers banned phrases and structures, Polish honorific register (Pan/Pani/Państwo vs informal "ty"), grammar traps (month declension), typography (no em-dashes, no smart quotes, heading hierarchy) and a "what is NOT slop" whitelist, because English anti-slop lists would cut greetings that are mandatory in Polish business writing. Includes a zero-dependency checker script. Tested on 14 real-world marketing scenarios: 0 violations with the skill vs 22 in 4 baseline texts without it.
+A Claude skill that keeps AI-generated Polish natural and free of AI tells. Polish AI slop differs from English slop: we measured it on a 60-text corpus from Bielik 11B, the only major natively Polish LLM (see [sonda-bielika](https://github.com/wysocki-lu/sonda-bielika)). The skill covers banned phrases and structures, Polish honorific register (Pan/Pani/Państwo vs informal "ty"), grammar and syntax traps (month declension, prepositional phrases that require a verbal noun: „przy budowie broni”, never „przy broni”), typography (no em-dashes, no smart quotes, heading hierarchy) and a "what is NOT slop" whitelist, because English anti-slop lists would cut greetings that are mandatory in Polish business writing. Includes a zero-dependency checker script. Tested on 14 real-world marketing scenarios: 0 violations with the skill vs 22 in 4 baseline texts without it.
 
 ## Podziękowania
 
