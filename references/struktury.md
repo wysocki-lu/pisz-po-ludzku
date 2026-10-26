@@ -1,6 +1,6 @@
 # Zakazane struktury
 
-Wzorce kompozycyjne charakterystyczne dla tekstu generowanego. Część to port z stop-slop (Hardik Pandya, MIT) przełożony na polszczyznę, część to własne rozszerzenia wypracowane w produkcji.
+Wzorce kompozycyjne charakterystyczne dla tekstu generowanego. Kalki i styl urzędniczy są osobno w [kalki-i-urzedniczy.md](kalki-i-urzedniczy.md). Część to port z stop-slop (Hardik Pandya, MIT) przełożony na polszczyznę, część to własne rozszerzenia wypracowane w produkcji.
 
 ## 1. Binarne kontrasty
 
@@ -88,6 +88,36 @@ Treść sama się rozwija, nie zapowiada.
 ## 14. Kwotowalne puenty
 
 Jeśli zdanie brzmi jak pull-quote na LinkedIn ("Bo marketing to nie koszt. To inwestycja."), przepisz je na zwykłą informację.
+
+## 15. Wariacja synonimiczna
+
+Ta sama rzecz nazwana w każdym zdaniu inaczej: „agent”, potem „asystent”, potem „narzędzie”, potem „rozwiązanie”. Model unika powtórzeń, a czytelnik zaczyna się zastanawiać, czy to cztery różne rzeczy.
+
+Zamiast tego: jedno słowo na jedną rzecz w całym tekście. Powtórzenie terminu jest w porządku.
+
+## 16. Fałszywe zakresy
+
+Ozdobne „od X po Y”, gdzie X i Y nie leżą na jednej skali: „od podstaw arkusza po kulturę pracy”, „od małych firm po globalne korporacje”. Do tego ozdobne „zarówno…, jak i…”, gdy wystarczy „i”.
+
+Zamiast tego: wymień, czego dotyczy tekst, albo podaj jeden konkretny przykład.
+
+## 17. Fałszywa autentyczność i fałszywe olśnienie
+
+Udawana anegdota bez żadnej historii („Ostatnio rozmawiałem z klientem i…”, po czym pada ogólnik) i zapowiedź rewelacji („I szczerze?”, „Oto czego nikt ci nie mówi”, „Prawdziwy problem polega na tym, że…”).
+
+Zamiast tego: prawdziwa historia z konkretami (kto, kiedy, ile) albo sama teza bez zapowiedzi.
+
+## 18. Puste zakończenia
+
+Zdanie na koniec, które pasuje do każdego tekstu: „Czas pokaże.”, „To krok w dobrym kierunku.”, „Ma ogromny potencjał.”, „Będzie odgrywać coraz większą rolę.”, „Przyszłość należy do…”.
+
+Zamiast tego: zakończ ostatnią konkretną informacją albo następnym krokiem z terminem.
+
+## 19. Szablon posta z LinkedIna
+
+Pionowy układ „jedno zdanie, jedna linia”, hak w pierwszym wierszu, puenta w ostatnim, coachingowe hasła („Uwolnij swój potencjał”, „Wejdź na wyższy poziom”, „Zmień myślenie”).
+
+Zamiast tego: akapity po 2-4 zdania, treść od pierwszego zdania, bez haseł.
 
 ## Zasady stylu (pozytywne)
 

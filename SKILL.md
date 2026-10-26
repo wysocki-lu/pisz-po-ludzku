@@ -44,11 +44,29 @@ Pełna lista z korektami: [references/struktury.md](references/struktury.md)
 ## 5. Typografia
 
 - Zakaz em-dash (—) i en-dash (–). Zamiast: kropka, przecinek, dwukropek, zwykły dywiz ze spacjami.
-- Zakaz smart quotes („" ''), wielokropka Unicode (…), NBSP, znaków zero-width.
+- Cudzysłowy polskie „…”. Zakaz prostych "…" i angielskich “…” w polskim tekście (poza kodem i polami, które wymagają prostego znaku).
+- Zakaz wielokropka Unicode (…), NBSP, znaków zero-width.
+- Przecinek dziesiętny („3,5%”), bez przecinka po „Dodatkowo”, „Jednakże” na początku zdania.
 - Zakaz **pogrubień markdown** w plain-texcie (mail, post, formularz: gwiazdki wyświetlą się dosłownie).
 - Zakaz Title Case w polskich nagłówkach ("Dlaczego Audyt SEO To Pierwszy Krok" to kalka z angielskiego).
 - Hierarchia nagłówków: H1 > H2 > H3 > body, minimum 3-4 px różnicy + zmiana wagi. Zakaz eyebrow microcaps (małych UPPERCASE labelek nad nagłówkami).
 - Szczegóły ze skalą pikselową: [references/typografia.md](references/typografia.md)
+
+## 6. Kalki i styl urzędniczy
+
+„dokonać zakupu” zamiast „kupić”, „stanowi” i „odgrywa kluczową rolę” zamiast „jest”, „w oparciu o”, „dedykowany dla”, „zaadresować”, imiesłowowe doczepki („…, podkreślając wyjątkowy charakter”), nadmiar „Twój”, posiekane zdania. Osobne przejście po tekście: [references/kalki-i-urzedniczy.md](references/kalki-i-urzedniczy.md)
+
+## 7. Zasady ochronne
+
+Redakcja nie może zmienić treści. Po poprawkach porównaj tekst z oryginałem:
+
+- Liczby, daty, kwoty, nazwy własne i numery przepisów bez zmian.
+- Modalność bez zmian: „może”, „powinien” i „musi” to trzy różne treści. Kwantyfikator też: „część” to nie „większość”.
+- Warunki i wyjątki zostają („chyba że”, „z wyjątkiem”). Najczęściej znikają przy skracaniu.
+- Łącząc zdania, nie dopisuj „bo” ani „więc”, jeśli związku przyczynowego nie było.
+- Nie poprawiaj cytatów ani fraz, o których tekst mówi (np. przykładów złych zwrotów w poradniku).
+- Liczy się skupisko sygnałów. Pojedyncze „ponadto” w długim tekście to nie powód do przepisywania całości.
+- Gdy poprawka zmienia sens, zostaw brzmienie oryginału.
 
 ## Kontrolka końcowa
 
@@ -64,6 +82,9 @@ Przed oddaniem KAŻDEGO tekstu sprawdź:
 8. Pogrubienia markdown w tekście, który nie renderuje markdown? Usuń gwiazdki.
 9. Ta sama liczba powtórzona w dwóch miejscach? Za drugim razem zaimek albo nic.
 10. Zdanie brzmi jak typowy output AI? Przepisz je inaczej.
+11. „stanowi”, „odgrywa rolę”, „dokonać”, „w oparciu o”, „dedykowany”? Zamień na zwykły czasownik i polskie słowo.
+12. Liczba bez źródła? Usuń albo napisz skromniej. Nie zmyślaj.
+13. Po redakcji: liczby, „może/musi”, warunki i wyjątki takie same jak w oryginale?
 
 ## Automat kontrolny
 

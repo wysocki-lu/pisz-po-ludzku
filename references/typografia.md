@@ -8,13 +8,24 @@ Znaki i układ, po których czytelnik natychmiast poznaje tekst generowany albo 
 |---|---|---|
 | — (em-dash) | U+2014 | kropka, przecinek, dwukropek, zwykły dywiz "-" ze spacjami |
 | – (en-dash) | U+2013 | jak wyżej |
-| „ " " (smart quotes) | U+201E/201C/201D | proste cudzysłowy " " |
+| " " (proste cudzysłowy w polskim tekście) | U+0022 | polskie cudzysłowy „ ” |
+| “ ” (angielskie cudzysłowy) | U+201C/201D | polskie cudzysłowy „ ” |
 | ' ' (apostrofy typograficzne) | U+2018/2019 | prosty apostrof ' |
 | … (wielokropek Unicode) | U+2026 | trzy kropki ... |
 | twarda spacja | U+00A0, U+202F | zwykła spacja |
 | znaki zero-width | U+200B/200C/200D/FEFF | usuń całkowicie |
 
+Polskie cudzysłowy „” (otwierający dolny, zamykający górny) to norma polszczyzny według PWN i taki zapis stosują wszystkie polskie zestawy reguł anty-AI. Śladem modelu są proste cudzysłowy "…" i angielskie “…” w polskim tekście (zmiana 26.10.2026, wcześniej skill zakazywał „”). Wyjątek: kod, JSON i pola, w których system wymaga prostego znaku.
+
 Em-dash to najbardziej rozpoznawalny AI-tell w polskich tekstach. Polszczyzna codzienna (mail, post, raport w plain-texcie) używa zwykłego dywizu ze spacjami albo interpunkcji.
+
+## Drobna typografia, po której widać tłumaczenie
+
+- Przecinek dziesiętny: „3,5%”, „12,40 zł”, nie „3.5%”.
+- Kropka po cudzysłowie, gdy cytat jest częścią zdania: Napisał, że „wróci jutro”. Kropka przed cudzysłowem tylko wtedy, gdy cytujesz całe zdanie od wielkiej litery.
+- Mała litera po dwukropku w środku zdania („Wniosek: kampania działa”), chyba że po dwukropku zaczyna się cytat albo nazwa własna.
+- Konsekwentna interpunkcja w listach: albo wszystkie punkty bez kropki, albo wszystkie pełnymi zdaniami z kropką.
+- Bez przecinka po okoliczniku na początku zdania („Dodatkowo warto…”, nie „Dodatkowo, warto…”), patrz [kalki-i-urzedniczy.md](kalki-i-urzedniczy.md).
 
 ## Markdown w plain-texcie
 

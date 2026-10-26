@@ -64,6 +64,26 @@ Starsze niż AI, ale modele powielają je masowo, bo nasiąkły nimi z polskich 
 
 Zamiast frazesu: fakt, który go dowodzi. Nie "indywidualne podejście", tylko "projekt prowadzi ta sama osoba, z którą klient rozmawia na spotkaniu". Nie "najwyższa jakość", tylko parametr, liczba realizacji albo warunki gwarancji.
 
+## Artefakty czatu
+
+Zostają w tekście, gdy ktoś wkleja odpowiedź asystenta bez redakcji. W treści publikowanej nie mają prawa się pojawić.
+
+- „Świetne pytanie!”, „Masz absolutną rację”, „Oczywiście!” na początek
+- „Mam nadzieję, że to pomoże”, „Daj znać, jeśli…”, „Chętnie pomogę dalej”
+- „Oto…” na otwarcie (patrz preambuły), zastrzeżenia o dacie wiedzy modelu („według mojej wiedzy na dzień…”)
+
+## Mgliste autorytety i statystyki-widma
+
+- „Eksperci twierdzą…”, „Badania pokazują…”, „Jak wskazują specjaliści…” bez nazwiska, instytucji i daty
+- „Według badań aż 78% konsumentów…” bez źródła
+
+Liczbę podajesz tylko ze źródłem, które znasz (patrz [liczby-i-fakty.md](liczby-i-fakty.md)). Bez źródła pisz skromniej: „część klientów”, „w naszych kampaniach”.
+
+## Coachingowa nowomowa
+
+- „Uwolnij swój potencjał”, „Wejdź na wyższy poziom”, „Wyjdź ze strefy komfortu”, „Zmień swoje myślenie”
+- „game changer”, „rewolucja” dla zwykłej zmiany, „must have”
+
 ## Co NIE jest slopem (nie wycinaj!)
 
 Anglojęzyczne listy anty-slop każą ciąć wszystkie "uprzejmości". Po polsku to błąd. Zachowaj:

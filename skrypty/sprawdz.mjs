@@ -42,11 +42,34 @@ const FRAZESY_MARKETINGOWE = [
   'kim jesteśmy?', 'co nas wyróżnia', 'czas odnowy', 'coś wyjątkowego',
 ];
 
+// Kalki z angielskiego, styl urzędniczy, artefakty czatu, puste zakończenia i coachingowa nowomowa
+// (references/kalki-i-urzedniczy.md, frazy.md, struktury.md 17-19; źródła w README).
+const KALKI_I_URZEDNICZY = [
+  'w oparciu o', 'dedykowany dla', 'dedykowana dla', 'dedykowane dla', 'zaadres',
+  'wydaje się być', 'robi różnicę', 'robić różnicę', 'robi sens', 'na ten moment', 'na dzień dzisiejszy',
+  'w dniu dzisiejszym', 'dokonać zakupu', 'dokonania zakupu', 'dokonać zgłoszenia', 'dokonać wyboru',
+  'posiadać możliwość', 'posiada możliwość', 'ulec poprawie', 'uległ poprawie', 'uległa poprawie',
+  'przeprowadzić analizę', 'w miesiącu ', 'odgrywa kluczową rolę', 'odgrywają kluczową rolę',
+  'odgrywać kluczową rolę', 'kluczowy interesariusz', 'zagłębmy się', 'odblokować potencjał',
+  'dostarczać wartość', 'dostarcza wartość', 'może poszczycić się',
+];
+
+const ARTEFAKTY_I_PUSTE = [
+  'świetne pytanie', 'masz absolutną rację', 'chętnie pomogę', 'daj znać, jeśli', 'mam nadzieję, że to pomoże',
+  'według mojej wiedzy', 'czas pokaże', 'krok w dobrym kierunku', 'ma ogromny potencjał',
+  'będzie odgrywać coraz większą rolę', 'przyszłość należy do', 'uwolnij swój potencjał',
+  'wejdź na wyższy poziom', 'wyjdź ze strefy komfortu', 'oto czego nikt', 'i szczerze?',
+  'prawdziwy problem polega na tym', 'game changer',
+];
+
 const FRAZY_MIEKKIE = [
   'po prostu', 'rzeczywiście', 'zdecydowanie', 'absolutnie', 'praktycznie',
   'dosłownie', 'zasadniczo', 'definitywnie', 'dodatkowo', 'z drugiej strony',
   'biorąc pod uwagę', 'pod kątem', 'nie tylko', 'w związku z tym',
   'tym samym', 'kluczow', 'wyjątkow', 'cele biznesowe', 'profesjonalizm',
+  'stanowi ', 'stanowią ', 'pełni funkcję', 'charakteryzuje się', 'w ramach', 'w zakresie', 'w celu ',
+  'jednakże', 'albowiem', 'aczkolwiek', 'tudzież', 'zarówno', 'eksperci twierdzą', 'badania pokazują',
+  'jak wskazują', 'od podstaw po', 'finalnie', 'generalnie',
 ];
 
 const ZLA_ODMIANA_MIESIECY = [
@@ -58,7 +81,9 @@ const ZLA_ODMIANA_MIESIECY = [
 const ZNAKI = [
   { re: /—/g, nazwa: 'em-dash (—)' },
   { re: /–/g, nazwa: 'en-dash (–)' },
-  { re: /[„“”«»]/g, nazwa: 'smart quotes („ " »)' },
+  // Polskie „…” to norma (zmiana 26.10.2026). Śladem modelu są proste "…" i angielskie “…” w polskim tekście.
+  { re: /"[^"\n]*\p{L}[^"\n]*"/gu, nazwa: 'proste cudzysłowy "…" (pisz „…”)' },
+  { re: /“/g, nazwa: 'angielski cudzysłów “ (pisz „…”)' },
   { re: /[‘’]/g, nazwa: 'apostrof typograficzny' },
   { re: /…/g, nazwa: 'wielokropek Unicode (…)' },
   { re: /[   ]/g, nazwa: 'twarda spacja' },
@@ -123,6 +148,49 @@ function sprawdzTitleCase(tekst) {
   return trafienia;
 }
 
+// Po polsku po okoliczniku na początku zdania nie ma przecinka („Dodatkowo warto…”). Modele dopisują go z angielskiego.
+const PRZECINEK_PO_OKOLICZNIKU = /(?:^|[.!?]\s+)(Dodatkowo|Jednakże|Ponadto|Natomiast|Niemniej|Oczywiście|Szczerze|Finalnie|Generalnie|Co więcej|Przede wszystkim|Na szczęście|Ostatecznie),/gu;
+const KROPKA_DZIESIETNA = /\b\d+\.\d+\s?(%|zł|proc|mln|tys)/gu;
+// Doczepka z imiesłowem na „-ąc” po przecinku na końcu zdania („…, podkreślając wyjątkowy charakter miasta.”)
+const DOCZEPKA = /,\s+(\p{Ll}+ąc)\b[^.!?\n]{0,120}[.!?]/gu;
+const TWOJ = /\b(twój|twoja|twoje|twojego|twojej|twoim|twoją|twoich|twoimi)\b/giu;
+/** Ile zdań musi mieć tekst, żeby liczyć monotonię długości. */
+const MIN_ZDAN_DO_METRYK = 8;
+/** Współczynnik zmienności długości zdań poniżej tej wartości: zdania o podobnej długości jak metronom. */
+const PROG_MONOTONII = 0.3;
+
+/** Tekst bez cytatów „…”: cytatów i fraz, o których tekst mówi, nie poprawiamy (SKILL.md, zasady ochronne). */
+const bezCytatow = (tekst) => tekst.replace(/„[^”\n]*”/g, ' ');
+
+function zdania(tekst) {
+  return tekst
+    .replace(/\s+/g, ' ')
+    .split(/(?<=[.!?])\s+(?=\p{Lu})/u)
+    .map((z) => z.trim())
+    .filter((z) => z.split(' ').length >= 3);
+}
+
+function metryki(tekst) {
+  const uwagi = [];
+  const lista = zdania(tekst);
+  if (lista.length >= MIN_ZDAN_DO_METRYK) {
+    const dlugosci = lista.map((z) => z.split(' ').length);
+    const srednia = dlugosci.reduce((a, b) => a + b, 0) / dlugosci.length;
+    const odchylenie = Math.sqrt(dlugosci.reduce((a, d) => a + (d - srednia) ** 2, 0) / dlugosci.length);
+    const cv = odchylenie / srednia;
+    if (cv < PROG_MONOTONII) uwagi.push(`zdania o podobnej długości (zmienność ${cv.toFixed(2)}, średnio ${srednia.toFixed(0)} słów): przełam rytm`);
+  }
+  // Seria co najmniej trzech zdań zaczynających się tym samym słowem
+  let seria = 1;
+  for (let i = 1; i < lista.length; i++) {
+    const a = lista[i - 1].split(' ')[0].toLowerCase();
+    const b = lista[i].split(' ')[0].toLowerCase();
+    seria = a === b ? seria + 1 : 1;
+    if (seria === 3) uwagi.push(`trzy zdania z rzędu zaczynają się od „${lista[i].split(' ')[0]}”`);
+  }
+  return uwagi;
+}
+
 function sprawdz(tekst, nazwa) {
   const bledy = [];
   const uwagi = [];
@@ -137,10 +205,21 @@ function sprawdz(tekst, nazwa) {
 
   if (/^\s*(\*\*)?oto\s/i.test(tekst)) bledy.push('asystencka preambuła "Oto..." na starcie');
 
-  for (const { fraza, ile } of znajdzFrazy(tekst, FRAZY_TWARDE)) {
+  const bezCyt = bezCytatow(tekst);
+  for (const [, slowo] of bezCyt.matchAll(PRZECINEK_PO_OKOLICZNIKU)) bledy.push(`zbędny przecinek po „${slowo}” na początku zdania`);
+  for (const [liczba] of tekst.matchAll(KROPKA_DZIESIETNA)) bledy.push(`kropka dziesiętna w „${liczba}” (pisz przecinkiem)`);
+  for (const { fraza, ile } of znajdzFrazy(bezCyt, KALKI_I_URZEDNICZY)) bledy.push(`kalka albo styl urzędniczy "${fraza}": ${ile}x`);
+  for (const { fraza, ile } of znajdzFrazy(bezCyt, ARTEFAKTY_I_PUSTE)) bledy.push(`artefakt czatu albo puste zdanie "${fraza}": ${ile}x`);
+  for (const [, imieslow] of bezCyt.matchAll(DOCZEPKA)) uwagi.push(`doczepka z imiesłowem „${imieslow}” na końcu zdania: utnij albo zrób osobne zdanie`);
+  const slowa = tekst.split(/\s+/).filter(Boolean).length;
+  const twoj = (tekst.match(TWOJ) ?? []).length;
+  if (twoj >= 4 && twoj / Math.max(slowa, 1) > 1 / 150) uwagi.push(`dużo „Twój/Twoje”: ${twoj}x na ${slowa} słów (kalka z angielskiego „your”)`);
+  uwagi.push(...metryki(bezCyt));
+
+  for (const { fraza, ile } of znajdzFrazy(bezCyt, FRAZY_TWARDE)) {
     bledy.push(`zakazana fraza "${fraza}": ${ile}x`);
   }
-  for (const { fraza, ile } of znajdzFrazy(tekst, FRAZESY_MARKETINGOWE)) {
+  for (const { fraza, ile } of znajdzFrazy(bezCyt, FRAZESY_MARKETINGOWE)) {
     bledy.push(`frazes marketingowy "${fraza}": ${ile}x`);
   }
 
@@ -152,7 +231,7 @@ function sprawdz(tekst, nazwa) {
   for (const { fraza, ile } of znajdzFrazy(tekst, ZLA_ODMIANA_MIESIECY)) {
     bledy.push(`zła odmiana miesiąca "${fraza}" (miejscownik!): ${ile}x`);
   }
-  for (const { fraza, ile } of znajdzFrazy(tekst, FRAZY_MIEKKIE)) {
+  for (const { fraza, ile } of znajdzFrazy(bezCyt, FRAZY_MIEKKIE)) {
     uwagi.push(`fraza do oceny "${fraza}": ${ile}x`);
   }
 

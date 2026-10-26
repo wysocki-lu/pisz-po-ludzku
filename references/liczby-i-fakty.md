@@ -16,6 +16,10 @@ Rekomendacja bez liczby w uzasadnieniu to zgadywanie. Lepszy brak rekomendacji n
 - Źle: "Rekomendujemy zwiększenie budżetu, bo kampania dobrze rokuje."
 - Dobrze: "Rekomendujemy zwiększenie budżetu: CPA 14 zł przy średniej branżowej 35 zł."
 
+## Nie zmyślaj liczb
+
+Reguła „fakt + liczba” nie pozwala wymyślić liczby, której nie ma w danych. Liczba musi pochodzić z raportu, z danych klienta albo z podanego źródła (nazwa, rok). Jeśli jej nie masz, napisz skromniej i bez przymiotnika: „część klientów”, „kilka kampanii”, „w październiku było więcej zapytań niż we wrześniu”. Zmyślona liczba jest gorsza niż jej brak, bo czytelnik ją zapamięta i powtórzy.
+
 ## Bez spekulacji i prognoz bez podstawy
 
 - Źle: "Wynik byłby lepszy, gdyby...", "Maj powinien przynieść więcej zapytań", "Spodziewamy się, że..."

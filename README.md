@@ -49,27 +49,37 @@ Skill przeszedł 14 scenariuszy testowych pisanych z perspektywy freelancerów i
 node skrypty/sprawdz.mjs tekst.txt
 ```
 
-Zero zależności. Zgłasza twarde błędy (znaki AI, zakazane frazy, frazesy marketingowe, preambuły, Title Case, zła odmiana miesięcy, wyrażenia przyimkowe bez nazwy czynności) i miękkie uwagi do ręcznej oceny.
+Zero zależności. Zgłasza twarde błędy (znaki AI, proste cudzysłowy, zakazane frazy, frazesy marketingowe, kalki i styl urzędniczy, artefakty czatu, puste zakończenia, zbędny przecinek po okoliczniku, kropka dziesiętna, preambuły, Title Case, zła odmiana miesięcy, wyrażenia przyimkowe bez nazwy czynności) i miękkie uwagi do ręcznej oceny (imiesłowowe doczepki, nadmiar „Twój”, monotonia długości zdań, serie zdań zaczynających się tak samo). Frazy w cytatach „…” pomija.
 
 ## Struktura
 
 - `SKILL.md`: reguły główne + kontrolka końcowa
 - `skrypty/sprawdz.mjs`: automat kontrolny
 - `references/frazy.md`: zakazane frazy + co NIE jest slopem
-- `references/struktury.md`: 14 zakazanych wzorców kompozycyjnych
+- `references/struktury.md`: 19 zakazanych wzorców kompozycyjnych
+- `references/kalki-i-urzedniczy.md`: styl urzędniczy, „stanowi” zamiast „jest”, imiesłowowe doczepki, kalki z angielskiego, zbędny przecinek, zaimki, posiekane zdania
 - `references/gramatyka.md`: miejscownik, odmiana "Państwa", rejestr Pan/Ty, składnia wyrażeń przyimkowych
-- `references/typografia.md`: znaki zakazane, hierarchia nagłówków
+- `references/typografia.md`: znaki zakazane, polskie cudzysłowy „”, przecinek dziesiętny, hierarchia nagłówków
 - `references/liczby-i-fakty.md`: teksty analityczne (fakt + liczba)
 - `references/maniery-bielika.md`: wnioski z sondy empirycznej
 - `references/przyklady.md`: before/after
 
 ## English summary
 
-A Claude skill that keeps AI-generated Polish natural and free of AI tells. Polish AI slop differs from English slop: we measured it on a 60-text corpus from Bielik 11B, the only major natively Polish LLM (see [sonda-bielika](https://github.com/wysocki-lu/sonda-bielika)). The skill covers banned phrases and structures, Polish honorific register (Pan/Pani/Państwo vs informal "ty"), grammar and syntax traps (month declension, prepositional phrases that require a verbal noun: „przy budowie broni”, never „przy broni”), typography (no em-dashes, no smart quotes, heading hierarchy) and a "what is NOT slop" whitelist, because English anti-slop lists would cut greetings that are mandatory in Polish business writing. Includes a zero-dependency checker script. Tested on 14 real-world marketing scenarios: 0 violations with the skill vs 22 in 4 baseline texts without it.
+A Claude skill that keeps AI-generated Polish natural and free of AI tells. Polish AI slop differs from English slop: we measured it on a 60-text corpus from Bielik 11B, the only major natively Polish LLM (see [sonda-bielika](https://github.com/wysocki-lu/sonda-bielika)). The skill covers banned phrases and structures, Polish honorific register (Pan/Pani/Państwo vs informal "ty"), grammar and syntax traps (month declension, prepositional phrases that require a verbal noun: „przy budowie broni”, never „przy broni”), typography (no em-dashes, Polish „” quotes instead of straight "…", decimal comma, heading hierarchy), calques and officialese, protective rules (no meaning drift, quotes left untouched) and a "what is NOT slop" whitelist, because English anti-slop lists would cut greetings that are mandatory in Polish business writing. Includes a zero-dependency checker script. Tested on 14 real-world marketing scenarios: 0 violations with the skill vs 22 in 4 baseline texts without it.
 
 ## Podziękowania
 
 Część reguł strukturalnych to port i rozszerzenie [stop-slop](https://github.com/hardikpandya/stop-slop) (Hardik Pandya, MIT) na realia polszczyzny.
+
+Rozbudowa z 26.10.2026 (kalki i styl urzędniczy, struktury 15-19, artefakty czatu, zasady ochronne, nowe testy w skrypcie, polskie cudzysłowy) korzysta z pomysłów z polskich zestawów na licencji MIT, opisanych własnymi słowami:
+
+- [miodkuj](https://github.com/bartekpucek/miodkuj) (Bartek Pucek): prosty język, bezpieczniki przed fałszywym alarmem, nietykalność cytatów
+- [humanizer-pl](https://github.com/odwrotnie/humanizer-pl) (odwrotnie): polskie znaki tekstu z AI, kalki, badania nad polszczyzną modeli
+- [humanizer-pl](https://github.com/PawelASzczesny/humanizer-pl) (Paweł A. Szczęsny): drugi przebieg „polszczyzna”, audyt semantyczny
+- [humanizer-polish](https://github.com/empios/humanizer-polish) (empios): metryki rytmu zdań
+
+Ogólne kategorie znaków AI za stroną [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) (CC BY-SA, tylko pomysły, bez tekstu). Dane o interpunkcji ChatGPT po polsku: Mazur, „LingVaria” 2024.
 
 ## Licencja
 
